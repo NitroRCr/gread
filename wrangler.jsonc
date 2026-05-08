@@ -1,5 +1,5 @@
 {
-  "name": "nyaai-docs",
+  "name": "gread",
   "compatibility_date": "2026-04-03",
   "assets": {
         "directory": "docs/.vitepress/dist"
