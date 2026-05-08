@@ -16,7 +16,7 @@ ENV NODE_ENV=production
 
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /app/dist/server .
+COPY --from=builder /app/dist .
 COPY ./drizzle ./drizzle
 
 EXPOSE 3000
