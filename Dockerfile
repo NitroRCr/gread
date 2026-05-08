@@ -7,7 +7,7 @@ RUN bun install
 
 COPY . .
 
-RUN bun run build:server
+RUN bun run build
 
 FROM oven/bun:1-slim AS runner
 

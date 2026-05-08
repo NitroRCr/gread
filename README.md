@@ -1,6 +1,6 @@
 # Gread
 
-A skill that gives your agent access to the source code and docs of all public github repos.
+A skill that gives your agent access to the source code of all public github repos.
 
 - **Plug and Play**: Compatible with all popular coding agents and MCP clients, ready to use out of the box
 - **Skill and MCP**: Both Skill and MCP are provided, connect with either option
