@@ -12,6 +12,8 @@ import { zValidator } from '@hono/zod-validator'
 import Handlebars from 'handlebars'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
+import { rateLimiter } from 'hono-rate-limiter'
+import { config } from './config'
 
 const app = new Hono()
 
@@ -35,6 +37,14 @@ const transport = new StreamableHTTPTransport()
 
 app.use(logger())
 app.use(cors())
+
+app.use(
+  rateLimiter({
+    windowMs: 60 * 1000,
+    limit: config.rpmLimit,
+    keyGenerator: (c) => c.req.header('x-forwarded-for') ?? '',
+  }),
+)
 
 app.all('/mcp', async (c) => {
   if (!server.isConnected()) await server.connect(transport)

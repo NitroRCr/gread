@@ -22,11 +22,13 @@
     "@ai-sdk/openai-compatible": "^2.0.46",
     "@hono/mcp": "^0.2.5",
     "@hono/zod-validator": "^0.7.6",
+    "@material/material-color-utilities": "0.3",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "ai": "^6.0.175",
     "drizzle-orm": "^1.0.0-rc.2",
     "handlebars": "^4.7.9",
     "hono": "^4.12.17",
+    "hono-rate-limiter": "^0.5.3",
     "zod": "^4.4.3"
   },
   "scripts": {

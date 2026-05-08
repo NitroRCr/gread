@@ -8,11 +8,8 @@ hero:
   tagline: 让你的 Agent 能够访问所有开源库的源码和文档
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: 快速开始
+      link: '#快速开始'
 
 features:
   - title: 即插即用
@@ -67,4 +64,37 @@ JSON 配置参考：
 
 ## 更多信息
 
-你可以查看 [SKILL.md]() 了解 Gread 提供的工具和参数。或者，直接添加 Gread 并向你的 Agent 询问更多信息！
+你可以查看 [SKILL.md](https://github.com/NitroRCr/gread/blob/main/.agents/skills/gread/SKILL.md) 了解 Gread 提供的工具和参数。或者，直接添加 Gread 并向你的 Agent 询问更多信息！
+
+## 对比
+
+了解 Gread 与现有工具有何不同：
+
+::: details 对比 [Deepwiki](https://deepwiki.com/) / [Zread](https://zread.ai/)
+
+- Deepwiki / Zread 只能在他们的网站上询问 AI，而 Gread 将这种能力带给了你自己的 Agent
+- Deepwiki / Zread 的 AI 只能访问当前仓库，无法同时访问多个仓库；而 Gread 可以随时访问任意仓库
+- Deepwiki / Zread 是闭源的，而 Gread 是开源的
+- Deepwiki / Zread 会生成用于深度理解项目的文档，而 Gread 没有这个功能
+:::
+
+::: details 对比 [Zread MCP](https://zread.ai/mcp)
+
+- Zread MCP 需要购买 GLM Coding Plan 才能使用，且有严格的用量限制；而 Gread 可以免费使用
+- Zread MCP 是闭源的，而 Gread 是开源的
+- Zread MCP 仅提供 MCP，而 Gread 同时提供 Skill 和 MCP
+:::
+
+::: details 对比 [GitMCP](https://github.com/idosal/git-mcp)
+
+- GitMCP 使用 GitHub API 读取/搜索代码，响应较慢；而 Gread 会将代码部分克隆至服务端本地，使用 git 读取/搜索代码，响应迅速。
+- GitMCP 未提供列出目录树的工具，而 Gread 提供了。这有助于 Agent 更高效地读取代码库。
+- GitMCP 仅提供 MCP，而 Gread 同时提供 Skill 和 MCP
+:::
+
+::: details 对比 [Sourcebot](https://github.com/sourcebot-dev/sourcebot)
+
+- Sourcebot 只能访问已索引的仓库；而 Gread 能访问所有公开仓库，“索引” 只是一种缓存
+- Sourcebot 需要自部署使用，而 Gread 提供开箱即用的服务
+- Sourcebot 提供用户界面和 MCP，而 Gread 提供 Skill 和 MCP
+:::

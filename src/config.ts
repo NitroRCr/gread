@@ -18,4 +18,5 @@ export const config = {
   openaiBaseUrl: process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1',
   openaiApiKey: process.env.OPENAI_API_KEY,
   openaiModel: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+  rpmLimit: Number(process.env.RPM_LIMIT) || 60,
 }
