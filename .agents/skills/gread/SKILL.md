@@ -3,7 +3,7 @@ name: gread
 description: Provide the ability to search, inspect, and read source code from all public GitHub repositories and their associated documentation.
 ---
 
-# `gread`
+# Gread
 
 Provide the ability to search, inspect, and read source code from all public GitHub repositories and their associated documentation.
 

@@ -27,12 +27,6 @@ export default defineConfig({
           { text: 'Home', link: '/' },
           { text: 'Self Host', link: '/self-host' },
         ],
-        sidebar: [
-          {
-            text: 'Self Host',
-            link: '/self-host',
-          },
-        ],
       },
     },
     zh: {
@@ -42,12 +36,6 @@ export default defineConfig({
         nav: [
           { text: '首页', link: '/zh/' },
           { text: '自部署', link: '/zh/self-host' },
-        ],
-        sidebar: [
-          {
-            text: '自部署',
-            link: '/zh/self-host',
-          },
         ],
       },
     },
