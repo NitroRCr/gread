@@ -68,4 +68,4 @@ bun docs:dev
 
 ## Community Links
 
-- [Linux Do](https://linux.do)
+- [Linux Do](https://linux.do/t/topic/2144396)
