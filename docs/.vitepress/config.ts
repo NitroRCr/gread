@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'Gread',
-  description: '',
+  description: 'Give your agent access to the source code and docs of all open-source libraries',
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg' }],
   ],

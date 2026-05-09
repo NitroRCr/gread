@@ -1,6 +1,6 @@
-# 自部署指南
+# 自部署
 
-你可以使用 Docker 自部署 Gread。
+虽然我们提供了开箱即用的服务，但你也可以使用 Docker 自部署 Gread。
 
 以 Docker Compose 为例。创建一个 `docker-compose.yml` 文件：
 

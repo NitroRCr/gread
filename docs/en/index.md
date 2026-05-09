@@ -98,3 +98,7 @@ Understand how Gread differs from existing tools:
 - Sourcebot requires self-deployment, while Gread provides out-of-the-box services
 - Sourcebot provides a user interface and MCP, while Gread provides Skill and MCP
 :::
+
+## Online Experience
+
+Want to try Gread online? Check out [Nya AI](https://nyaai.cc). It has Gread built-in—simply enable the **"GitHub Repos"** plugin in the chat.

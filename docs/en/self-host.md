@@ -1,6 +1,6 @@
 # Self-Hosting
 
-You can self-deploy Gread using Docker.
+While we offer a ready-to-use service, you can also self-deploy Gread using Docker.
 
 Taking Docker Compose as an example. Create a `docker-compose.yml` file:
 

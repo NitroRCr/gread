@@ -98,3 +98,7 @@ JSON 配置参考：
 - Sourcebot 需要自部署使用，而 Gread 提供开箱即用的服务
 - Sourcebot 提供用户界面和 MCP，而 Gread 提供 Skill 和 MCP
 :::
+
+## 在线体验
+
+想要在线体验 Gread？试试 [Nya AI](https://nyaai.cc)，它内置了 Gread，只需要在对话中启用 **“GitHub 项目”** 插件即可。
