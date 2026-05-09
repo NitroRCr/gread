@@ -46,6 +46,7 @@ setInterval(syncRepos, config.syncInterval)
 
 export default {
   port: config.port,
+  idleTimeout: 0,
   fetch: app.fetch,
 }
 

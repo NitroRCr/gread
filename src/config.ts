@@ -9,7 +9,7 @@ export const config = {
   dbPath: join(dataPath, 'sqlite.db'),
   reposPath: join(dataPath, 'repos'),
   minStars: Number(process.env.MIN_STARS) || 10000,
-  syncInterval: Number(process.env.SYNC_INTERVAL) || 72 * 60 * 60 * 1000, // 72 hours
+  syncInterval: Number(process.env.SYNC_INTERVAL) || 7 * 24 * 60 * 60 * 1000, // 7 days
   syncConcurrency: Number(process.env.SYNC_CONCURRENCY) || 8,
   repoRefreshThreshold: Number(process.env.REPO_REFRESH_THRESHOLD) || 7 * 24 * 60 * 60 * 1000, // 7 days
   port: Number(process.env.PORT) || 3000,

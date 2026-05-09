@@ -70,11 +70,11 @@ async function viewRepo(name: string) {
   try { await indexRepo(name) } catch (e) { console.error(e) }
   const r = db.select().from(repos).where(eq(repos.fullName, name)).get()
   if (!r) return 'Repo not indexed and could not be fetched.'
-  let result = repoTpl(r) + '\n' + treeTpl({ tree: (await getTree(name, '', 3, 20)) })
+  let result = repoTpl(r) + '\n' + treeTpl({ tree: (await getTree(name, '', 3, 25)) })
   if (r.docRepoName && r.docRepoName !== name) {
     const doc = db.select().from(repos).where(eq(repos.fullName, r.docRepoName)).get()
     if (doc) {
-      result += '\n\n---\n\n' + repoTpl(doc) + '\n' + treeTpl({ tree: (await getTree(r.docRepoName, '', 3, 20)) })
+      result += '\n\n---\n\n' + repoTpl(doc) + '\n' + treeTpl({ tree: (await getTree(r.docRepoName, '', 3, 25)) })
     }
   }
   return result
