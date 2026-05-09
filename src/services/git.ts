@@ -70,6 +70,7 @@ export async function getFile(repoName: string, path: string) {
 export type GrepOptions = {
   ignoreCase?: boolean
   fixedStrings?: boolean
+  extendedRegexp?: boolean
   contextLines?: number
   path?: string
 }
@@ -79,6 +80,7 @@ export async function grep(repoName: string, query: string, options: GrepOptions
     const args = ['grep', '-n', '-I']
     if (options.ignoreCase) args.push('-i')
     if (options.fixedStrings) args.push('-F')
+    if (options.extendedRegexp) args.push('-E')
     if (options.contextLines !== undefined) args.push(`-C${options.contextLines}`)
     args.push(query)
     // Always append HEAD since we are operating in a no-checkout repository

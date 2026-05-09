@@ -27,9 +27,9 @@ export async function fetchOrgRepos(orgUrl: string) {
   } catch { return [] }
 }
 
-export async function searchReposByStars(minStars: number, page = 1) {
-  const data = await fetchJson<any>(`/search/repositories?q=stars:>=${minStars}&sort=stars&order=desc&per_page=100&page=${page}`)
-  return data.items
+export async function searchReposByStars(minStars: number, maxStars: number | string = '*', page = 1) {
+  const data = await fetchJson<any>(`/search/repositories?q=stars:${minStars}..${maxStars}&sort=stars&order=desc&per_page=100&page=${page}`)
+  return data?.items || []
 }
 export async function searchGithubRepos(query: string, page = 1) {
   const data = await fetchJson<any>(`/search/repositories?q=${encodeURIComponent(query)}&sort=stars&order=desc&per_page=20&page=${page}`)

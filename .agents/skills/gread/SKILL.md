@@ -57,14 +57,15 @@ Retrieve the raw source code of specified files from within a known repository. 
 
 ### 5. Search within Repo
 Perform a fast `git grep` inside the repository.
-**Format**: `GET https://api.gread.dev/grep?name={user/repo}&q={search_pattern}&i=true&F=true&C=2&path={targetDir}`
+**Format**: `GET https://api.gread.dev/grep?name={user/repo}&q={search_pattern}&i=true&F=true&E=true&C=2&path={targetDir}`
 **Example**: `GET https://api.gread.dev/grep?name=honojs/hono&q=listen&C=2&path=src`
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `name` | string | Yes | Full name of the repository (owner/repo) |
-| `q` | string | Yes | Search pattern or query to pass to grep |
+| `q` | string | Yes | Search pattern or query to pass to git grep |
 | `i` | boolean | No | Ignore case distinctions (`-i`) |
 | `F` | boolean | No | Interpret pattern as fixed string (`-F`) |
+| `E` | boolean | No | Interpret pattern as extended regular expression (`-E`) |
 | `C` | number | No | Print num lines of output context (`-C`) |
 | `path` | string | No | Directory or file path to limit the search scope |

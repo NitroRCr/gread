@@ -130,6 +130,7 @@ app.get('/grep', zValidator('query', z.object({
   q: z.string(),
   i: z.string().optional().transform(v => v === 'true' || v === '1'),
   F: z.string().optional().transform(v => v === 'true' || v === '1'),
+  E: z.string().optional().transform(v => v === 'true' || v === '1'),
   C: z.coerce.number().optional(),
   path: z.string().optional(),
 })), async c => {
@@ -137,6 +138,7 @@ app.get('/grep', zValidator('query', z.object({
   return c.text(await searchCode(q.name, q.q, {
     ignoreCase: q.i,
     fixedStrings: q.F,
+    extendedRegexp: q.E,
     contextLines: q.C,
     path: q.path,
   }))
@@ -175,9 +177,10 @@ server.registerTool('search_code', {
   description: 'Perform a fast git grep inside the repository, allowing regex matching by default or substring search.',
   inputSchema: z.object({
     name: z.string().describe('Full name of the repository (owner/name)'),
-    query: z.string().describe('Search pattern or query to pass to grep'),
+    query: z.string().describe('Search pattern or query to pass to git grep'),
     ignoreCase: z.boolean().optional().describe('Ignore case distinctions in both the PATTERN and the input files (-i)'),
-    fixedStrings: z.boolean().optional().describe('Interpret PATTERN as a list of fixed strings, separated by newlines, any of which is to be matched (-F)'),
+    fixedStrings: z.boolean().optional().describe('Use fixed strings for patterns (don’t interpret pattern as a regex) (-F)'),
+    extendedRegexp: z.boolean().optional().describe('Use extended regular expressions (-E)'),
     contextLines: z.number().optional().describe('Print num lines of output context (-C)'),
     path: z.string().optional().describe('Directory or file path to limit the search scope'),
   }),
