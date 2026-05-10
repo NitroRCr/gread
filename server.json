@@ -1,0 +1,17 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.NitroRCr/gread",
+  "description": "An MCP server that gives your AI access to the source code and docs of all public github repos",
+  "status": "active",
+  "repository": {
+    "url": "https://github.com/NitroRCr/gread",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.gread.dev/mcp"
+    }
+  ]
+}
