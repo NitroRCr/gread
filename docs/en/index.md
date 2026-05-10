@@ -85,6 +85,14 @@ Understand how Gread differs from existing tools:
 - Zread MCP only provides MCP, while Gread provides both Skill and MCP
 :::
 
+::: details Compare with [Context7](https://context7.com/)
+
+- Context7 mainly focuses on docs; whereas Gread mainly focuses on source code, while also being able to access docs in the form of source code
+- Context7 only open-sourced its MCP server, its backend is proprietary; whereas Gread is completely open-source
+- Context7 has relatively strict usage limits and paid plans; whereas Gread is completely free
+- Gread can access all public GitHub repositories; Context7 can only access submitted libraries, but supports more sources
+:::
+
 ::: details Compare with [GitMCP](https://github.com/idosal/git-mcp)
 
 - GitMCP uses GitHub API to read/search code, with slower response times; Gread clones the code to the server locally and uses git to read/search code, with rapid response.

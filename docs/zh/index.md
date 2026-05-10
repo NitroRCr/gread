@@ -85,10 +85,18 @@ JSON 配置参考：
 - Zread MCP 仅提供 MCP，而 Gread 同时提供 Skill 和 MCP
 :::
 
+::: details 对比 [Context7](https://context7.com/)
+
+- Context7 主要针对文档；而 Gread 主要针对源代码，同时也能够以源代码的形式访问文档
+- Context7 仅开源了 MCP 服务器，其后端是私有的；而 Gread 是完全开源的
+- Context7 有较为严格的用量限制和付费计划；而 Gread 完全免费
+- Gread 能够访问所有公开的 GitHub 仓库；Context7 只能访问已提交的库，但支持更多来源
+:::
+
 ::: details 对比 [GitMCP](https://github.com/idosal/git-mcp)
 
 - GitMCP 使用 GitHub API 读取/搜索代码，响应较慢；而 Gread 会将代码部分克隆至服务端本地，使用 git 读取/搜索代码，响应迅速。
-- GitMCP 未提供列出目录树的工具，而 Gread 提供了。这有助于 Agent 更高效地读取代码库。
+- GitMCP 未提供列出目录树的工具，而 Gread 提供了。这有助于 Agent 更高效地读取代码库
 - GitMCP 仅提供 MCP，而 Gread 同时提供 Skill 和 MCP
 :::
 
