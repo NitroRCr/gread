@@ -30,7 +30,7 @@ export async function getTree(repoName: string, targetDir = '', maxDepth = 3, ma
   const tree = out.split('\n').filter(Boolean)
 
   const counts: Record<string, number> = {}
-  const truncated: Set<string> = new Set()
+  const skipPrefixes: string[] = []
   const result: string[] = []
 
   for (const path of tree) {
@@ -43,15 +43,14 @@ export async function getTree(repoName: string, targetDir = '', maxDepth = 3, ma
 
     if (depth > maxDepth) continue
 
+    if (skipPrefixes.some(p => path.startsWith(p))) continue
+
     const parent = path.split('/').slice(0, -1).join('/') || '/'
     counts[parent] = (counts[parent] || 0) + 1
 
     if (counts[parent] > maxPerDir) {
-      const key = `count:${parent}`
-      if (!truncated.has(key)) {
-        truncated.add(key)
-        result.push(parent === '/' ? '...' : `${parent}/...`)
-      }
+      skipPrefixes.push(parent === '/' ? '' : `${parent}/`)
+      result.push(parent === '/' ? '...' : `${parent}/...`)
       continue
     }
 
