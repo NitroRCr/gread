@@ -17,6 +17,8 @@ import { config } from './config'
 
 const app = new Hono()
 
+const repoNameSchema = z.string().regex(/^[a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+$/, 'Repository name must be in the format "owner/repo"')
+
 // -- Templates --
 const repoTpl = Handlebars.compile(`
 # {{fullName}}
@@ -103,12 +105,12 @@ app.get('/search', zValidator('query', z.object({ q: z.string().default('') })),
   return c.text(await searchRepos(c.req.valid('query').q))
 })
 
-app.get('/repo', zValidator('query', z.object({ name: z.string() })), async c => {
+app.get('/repo', zValidator('query', z.object({ name: repoNameSchema })), async c => {
   return c.text(await viewRepo(c.req.valid('query').name))
 })
 
 app.get('/tree', zValidator('query', z.object({
-  name: z.string(),
+  name: repoNameSchema,
   dir: z.string().default(''),
   depth: z.coerce.number().default(3),
   limit: z.coerce.number().default(40),
@@ -118,7 +120,7 @@ app.get('/tree', zValidator('query', z.object({
 })
 
 app.get('/read', zValidator('query', z.object({
-  name: z.string(),
+  name: repoNameSchema,
   paths: z.string().transform(v => v.split(',')),
 })), async c => {
   const { name, paths } = c.req.valid('query')
@@ -126,7 +128,7 @@ app.get('/read', zValidator('query', z.object({
 })
 
 app.get('/grep', zValidator('query', z.object({
-  name: z.string(),
+  name: repoNameSchema,
   q: z.string(),
   i: z.string().optional().transform(v => v === 'true' || v === '1'),
   F: z.string().optional().transform(v => v === 'true' || v === '1'),
@@ -152,13 +154,13 @@ server.registerTool('search_repos', {
 
 server.registerTool('view_repo', {
   description: 'View repository basic information and its directory structure. Includes corresponding documentation repo if available.',
-  inputSchema: z.object({ name: z.string().describe('Full name of the repository (owner/name)') }),
+  inputSchema: z.object({ name: repoNameSchema.describe('Full name of the repository (owner/name)') }),
 }, async ({ name }) => ({ content: [{ type: 'text', text: await viewRepo(name) }] }))
 
 server.registerTool('list_tree', {
   description: 'List the directory tree of a specific path in a repository with customizable depth and traversal limits.',
   inputSchema: z.object({
-    name: z.string().describe('Full name of the repository (owner/name)'),
+    name: repoNameSchema.describe('Full name of the repository (owner/name)'),
     targetDir: z.string().default('').describe('Target directory path to inspect. Leaves empty to search from root.'),
     maxDepth: z.number().default(3).describe('Maximum depth into the directory structure to list.'),
     maxPerDir: z.number().default(40).describe('Maximum number of items to display per directory level.'),
@@ -168,7 +170,7 @@ server.registerTool('list_tree', {
 server.registerTool('read_code', {
   description: 'Retrieve the raw source code of specified files from within a known repository.',
   inputSchema: z.object({
-    name: z.string().describe('Full name of the repository (owner/name)'),
+    name: repoNameSchema.describe('Full name of the repository (owner/name)'),
     paths: z.array(z.string()).describe('An array of precise file paths within the repository'),
   }),
 }, async ({ name, paths }) => ({ content: [{ type: 'text', text: await readCode(name, paths) }] }))
@@ -176,7 +178,7 @@ server.registerTool('read_code', {
 server.registerTool('search_code', {
   description: 'Perform a fast git grep inside the repository, allowing regex matching by default or substring search.',
   inputSchema: z.object({
-    name: z.string().describe('Full name of the repository (owner/name)'),
+    name: repoNameSchema.describe('Full name of the repository (owner/name)'),
     query: z.string().describe('Search pattern or query to pass to git grep'),
     ignoreCase: z.boolean().optional().describe('Ignore case distinctions in both the PATTERN and the input files (-i)'),
     fixedStrings: z.boolean().optional().describe('Use fixed strings for patterns (don’t interpret pattern as a regex) (-F)'),

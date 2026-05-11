@@ -4,7 +4,6 @@ const headers: Record<string, string> = config.githubToken ? { Authorization: `B
 
 async function fetchJson<T>(path: string): Promise<T> {
   const url = path.startsWith('http') ? path : `https://api.github.com${path}`
-  console.log(url)
   const res = await fetch(url, { headers })
   if (!res.ok) throw new Error(`GitHub API error: ${res.statusText}`)
   return res.json() as T
