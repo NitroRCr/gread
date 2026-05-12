@@ -96,7 +96,13 @@ async function readCode(name: string, paths: string[]) {
 
 async function searchCode(name: string, query: string, options: GrepOptions = {}) {
   try { await indexRepo(name) } catch (e) { console.error(e) }
-  const res = await grep(name, query, options)
+  let res = await grep(name, query, options)
+  if (res) {
+    res = res.split('\n').map(line => line.length > 10000 ? line.slice(0, 10000) + '...[TRUNCATED]' : line).join('\n')
+    if (res.length > 100000) {
+      res = res.slice(0, 100000) + '...[TRUNCATED]'
+    }
+  }
   return `## Search inside ${name} for "${query}"\n\`\`\`\n${res || 'No matches found.'}\n\`\`\``
 }
 
