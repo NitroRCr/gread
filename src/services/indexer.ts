@@ -6,7 +6,21 @@ import { partialClone } from './git'
 import { analyzeRepo } from './llm'
 import { config } from '../config'
 
+const activeIndexes = new Map<string, Promise<any>>()
+
 export async function indexRepo(fullName: string) {
+  if (activeIndexes.has(fullName)) return activeIndexes.get(fullName)
+
+  const promise = _indexRepo(fullName)
+  activeIndexes.set(fullName, promise)
+  try {
+    return await promise
+  } finally {
+    activeIndexes.delete(fullName)
+  }
+}
+
+async function _indexRepo(fullName: string) {
   const r = db.select().from(repos).where(eq(repos.fullName, fullName)).get()
   const isOutdated = r?.lastIndexedAt ? (Date.now() - r.lastIndexedAt.getTime() > config.repoRefreshThreshold) : true
   if (r && !isOutdated) {

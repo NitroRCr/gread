@@ -14,8 +14,8 @@ async function syncRepos() {
       while (repos.length < 1000) {
         const pageRepos = await searchReposByStars(config.minStars, maxStars, page)
         repos.push(...pageRepos)
-        if (pageRepos.length < 100) break
         page++
+        if (pageRepos.length < 100) break
         if (page > 10) break // GitHub Search API limits offset to 1000 items
       }
 
