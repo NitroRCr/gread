@@ -15,7 +15,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends git && \
+    apt-get install -y git && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /app/dist .
