@@ -8,10 +8,15 @@ import { config } from '../config'
 
 const activeIndexes = new Map<string, Promise<any>>()
 
-export async function indexRepo(fullName: string) {
+export async function indexRepo(fullName: string, chain: Set<string> = new Set()) {
+  if (chain.has(fullName)) {
+    console.log(`Skipping ${fullName} (already in indexing chain, cycle detected)`)
+    return
+  }
+
   if (activeIndexes.has(fullName)) return activeIndexes.get(fullName)
 
-  const promise = _indexRepo(fullName)
+  const promise = _indexRepo(fullName, chain)
   activeIndexes.set(fullName, promise)
   try {
     return await promise
@@ -20,7 +25,8 @@ export async function indexRepo(fullName: string) {
   }
 }
 
-async function _indexRepo(fullName: string) {
+async function _indexRepo(fullName: string, chain: Set<string>) {
+  chain.add(fullName)
   const r = db.select().from(repos).where(eq(repos.fullName, fullName)).get()
   const isOutdated = r?.lastIndexedAt ? (Date.now() - r.lastIndexedAt.getTime() > config.repoRefreshThreshold) : true
   if (r && !isOutdated) {
@@ -60,7 +66,7 @@ async function _indexRepo(fullName: string) {
   // Cascade index doc repo if found
   if (docRepoName && docRepoName !== fullName) {
     try {
-      await indexRepo(docRepoName)
+      await indexRepo(docRepoName, chain)
     } catch (e) {
       console.error(`Failed cascading doc repo ${docRepoName}`, e)
     }
